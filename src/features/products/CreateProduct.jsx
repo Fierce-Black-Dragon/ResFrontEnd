@@ -22,7 +22,7 @@ export const CreateProduct = ({ setAdd, add }) => {
   const errRef = useRef();
   const [form, setForm] = useState(initial);
   const token = useSelector(selectCurrentToken);
-  const [isSpecial, setIsSpecial] = useState(false);
+  const [isSpecial, setIsSpecial] = useState(form.isSpecial);
   const [file, setFile] = useState();
   const formData = new FormData();
   const navigate = useNavigate();
@@ -30,17 +30,14 @@ export const CreateProduct = ({ setAdd, add }) => {
   const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(form, isSpecial);
     formData.append("name", form?.name);
     formData.append("price", form?.price);
     formData.append("description", form?.description);
-    isSpecial
-      ? formData.append("isSpecial", "true")
-      : formData.append("isSpecial", "false");
-    isSpecial
-      ? formData.append("daySpecial", form?.daySpecial)
-      : formData.append("daySpecial", "");
-    // formData.set();
+    if (isSpecial && form?.isSpecial === true) {
+      formData.append("isSpecial", true);
+      formData.append("daySpecial", form?.daySpecial);
+    }
     formData.append("photo", file);
     // Display the keys
 
@@ -126,10 +123,12 @@ export const CreateProduct = ({ setAdd, add }) => {
             handleChange={handleChange}
           /> */}
         <label htmlFor="isSpecial"> Special Menu</label>
+        {isSpecial}
         <select
           name="isSpecial"
           id=""
           onChange={(e) => {
+            handleChange(e);
             setIsSpecial(e.target.value);
           }}
         >

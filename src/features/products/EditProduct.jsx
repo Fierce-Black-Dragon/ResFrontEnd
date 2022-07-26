@@ -34,13 +34,10 @@ const EditProduct = () => {
     formData.append("name", form?.name);
     formData.append("price", form?.price);
     formData.append("description", form?.description);
-    isSpecial
-      ? formData.append("isSpecial", "true")
-      : formData.append("isSpecial", "false");
-    isSpecial
-      ? formData.append("daySpecial", form?.daySpecial)
-      : formData.append("daySpecial", "");
-    // formData.set();
+    if (isSpecial && form?.isSpecial === true) {
+      formData.append("isSpecial", true);
+      formData.append("daySpecial", form?.daySpecial);
+    }
     formData.append("photo", file);
     // Display the keys
 
@@ -54,10 +51,11 @@ const EditProduct = () => {
           authorization: `Bearer ${token}`,
         },
       });
-
-      setForm(initial);
-      setAdd(!add);
-      navigate("/dashboard");
+      if (data) {
+        navigate("/dashboard");
+        setForm({});
+        setAdd(!add);
+      }
     } catch (error) {
       if (!error?.originalStatus) {
         // isLoading: true until timeout occurs
@@ -70,8 +68,8 @@ const EditProduct = () => {
         setErrMsg("Login Failed");
       }
 
-      // setForm(initial);
-      // setAdd(!add);
+      setForm({});
+      setAdd(!add);
     }
   };
   const handleChange = (e) => {
@@ -117,7 +115,6 @@ const EditProduct = () => {
           label={"Dish Name"}
           type="text"
           name="name"
-          required
           placeholder="Enter name"
           handleChange={handleChange}
         />
@@ -125,7 +122,6 @@ const EditProduct = () => {
           label={"Dish Price"}
           type="number"
           name="price"
-          required
           placeholder="Enter price"
           handleChange={handleChange}
         />
@@ -133,7 +129,6 @@ const EditProduct = () => {
           label={"Dish Description"}
           type="text"
           name="description"
-          required
           placeholder="Enter details"
           handleChange={handleChange}
         />
@@ -141,15 +136,18 @@ const EditProduct = () => {
             label={"Dish isSpecial"}
             type="b"
             name="price"
-            required
+           
             placeholder="Enter price"
             handleChange={handleChange}
           /> */}
         <label htmlFor="isSpecial"> Special Menu</label>
+
+        {isSpecial}
         <select
           name="isSpecial"
           id=""
           onChange={(e) => {
+            handleChange(e);
             setIsSpecial(e.target.value);
           }}
         >
@@ -159,10 +157,9 @@ const EditProduct = () => {
         {isSpecial ? (
           <>
             <Input
-              label={" day when Special"}
+              label={"  Special"}
               type="text"
               name="daySpecial"
-              required
               placeholder="enter day"
               handleChange={handleChange}
             />
@@ -175,7 +172,6 @@ const EditProduct = () => {
           type="file"
           name="file"
           value={file}
-          required
           placeholder="select image"
           handleChange={handleFile}
         />

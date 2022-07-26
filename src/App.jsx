@@ -34,7 +34,6 @@ function App() {
             <Route path="/product/:id" element={<EditProduct />} />
           </Route>
         </Routes>
-        <Footer />
       </div>
     </BrowserRouter>
   );

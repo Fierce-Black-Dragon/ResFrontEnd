@@ -21,7 +21,7 @@ const Navbar = () => {
     const { data } = await axios.get("/logout", {
       headers: {
         "Access-Control-Allow-Origin": "*",
-        "Content-Type": "multipart/form-data",
+
         authorization: `Bearer ${user?.accessToken}`,
       },
     });
@@ -85,16 +85,16 @@ const Navbar = () => {
 
             {/* user123@Vk */}
             {user?.name ? (
+              <li onClick={handleLogout} style={{ cursor: "pointer" }}>
+                {" "}
+                Sign out
+              </li>
+            ) : (
               <>
                 <li onClick={handleMEnu}>
                   <NavLink to="/auth">Login</NavLink>
                 </li>
               </>
-            ) : (
-              <li onClick={handleLogout} style={{ cursor: "pointer" }}>
-                {" "}
-                Sign out
-              </li>
             )}
           </ul>
         </div>

@@ -102,11 +102,7 @@ const Register = () => {
           </p>
           <h1>Register</h1>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="username">
-              Name:
-              {validName ? "valid" : ""}
-              {validName || !userForm.name ? "" : "invalid"}
-            </label>
+            <label htmlFor="username">Name:</label>
             <input
               type="text"
               id="username"
