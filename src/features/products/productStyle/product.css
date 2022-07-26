@@ -7,7 +7,7 @@
   border-radius: 15px;
   width: 250px;
   max-width: 100%;
-  height: max-content;
+  max-height: max-content;
   min-height: 500px;
   box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5),
     2px 2px 5px rgba(94, 104, 121, 0.3);
