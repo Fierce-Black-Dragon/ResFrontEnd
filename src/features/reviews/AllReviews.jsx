@@ -1,6 +1,7 @@
 import React from "react";
-import Review from "./review";
+
 import { useFetchReviewsQuery } from "./reviewApiSlice";
+import Review from "./Review";
 
 export const AllReviews = () => {
   const { data, isLoading, isSuccess, isError, error } = useFetchReviewsQuery();
