@@ -42,9 +42,11 @@ li {
 }
 
 .menu-link ul {
+  margin-top: 5rem;
   height: 4rem;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 

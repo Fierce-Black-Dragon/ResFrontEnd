@@ -22,9 +22,9 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/profile" element={<MyProfile />} />
           <Route path="/auth" element={<Auth />} />
           <Route element={<RequireAuth />}>
+            <Route path="/profile" element={<MyProfile />} />
             <Route path="/cart" element={<Cart />} />
           </Route>
           {/* protected routes for admin oonly  */}

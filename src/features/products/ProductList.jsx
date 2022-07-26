@@ -35,13 +35,21 @@ const ProductList = () => {
           <h5>Regular dishes</h5>
           <div className="dailyDishes">
             {regularProducts?.map((product) => {
-              return <Product key={product.id} {...product} edit />;
+              return (
+                <div key={product?._id}>
+                  <Product key={product.id} {...product} edit />
+                </div>
+              );
             })}
           </div>
           <h5>Special Dishes</h5>
           <div className="Special">
             {SpecialProduct?.map((product) => {
-              return <Product key={product.id} {...product} />;
+              return (
+                <div key={product?._id}>
+                  <Product key={product.id} {...product} />
+                </div>
+              );
             })}
           </div>
         </div>
