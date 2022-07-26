@@ -3,13 +3,13 @@ import { setCredentials, logOut } from "../../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://restapinew.herokuapp.com/api",
-  credentials: "include",
 
   prepareHeaders: (headers, { getState }) => {
     const user = JSON.parse(localStorage.getItem("profile"));
     if (user?.accessToken) {
       headers.set("authorization", `Bearer ${user.accessToken}`);
     }
+
     return headers;
   },
 });
