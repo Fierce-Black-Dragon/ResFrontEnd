@@ -1,0 +1,30 @@
+main {
+  height: 85vh;
+}
+
+.myprofile__header {
+  position: fixed;
+  left: 50%;
+  top: 15%;
+}
+.myprofile__ba {
+  background-color: rgb(156, 203, 244);
+  height: 100px;
+}
+.myprofile___details {
+  margin-left: 20px;
+}
+.myprofile__userName .myprofile__userEmail.myprofile__userCreated {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+}
+@media only screen and (max-width: 600px) {
+  .myprofile {
+  }
+  .myprofile__header {
+    position: fixed;
+    left: 40%;
+    top: 15%;
+  }
+}
