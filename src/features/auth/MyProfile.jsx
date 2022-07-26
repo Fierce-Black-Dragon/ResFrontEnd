@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 
 import { useDispatch } from "react-redux";
 
-import { useSelector } from "react-redux";
-import { selectCurrentUserDetails, setDetails } from "./authSlice";
 import "../../style/profile.css";
 
 import axios from "../../app/api/axios";

@@ -11,9 +11,10 @@ import RequireRole from "./features/auth/RequireRole";
 import Dashboard from "./pages/Dashboard";
 import Auth from "./pages/Auth";
 import RequireAuth from "./features/auth/RequireAuth";
-import { MyProfile } from "./features/auth/myProfile";
+
 import EditProduct from "./features/products/EditProduct";
 import Cart from "./features/cart/Cart";
+import { MyProfile } from "./features/auth/MyProfile";
 
 function App() {
   return (
