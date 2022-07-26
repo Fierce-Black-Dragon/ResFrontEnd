@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AddReview from "../features/reviews/AddReview";
-import Review from "../features/reviews/review";
+
 import Products from "../features/products/ProductList";
 import { AllReviews } from "./../features/reviews/AllReviews";
 
@@ -18,7 +18,6 @@ const HomePage = () => {
         ) : (
           <button onClick={() => setWrite(!write)}>Write Review</button>
         )}
-        <Review name="test" comment="test" rating={1.5} />
       </div>
       <div className="allReiews">
         <AllReviews />
