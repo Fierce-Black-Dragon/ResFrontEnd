@@ -78,6 +78,7 @@ const EditProduct = () => {
   const handleFile = (e) => {
     setFile(e.target.files[0]);
   };
+  console.log(data?.productDetails);
   return (
     <div>
       <div

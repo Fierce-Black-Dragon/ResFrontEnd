@@ -1,0 +1,12 @@
+.reviews {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.write {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: max-content;
+}

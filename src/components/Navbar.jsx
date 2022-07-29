@@ -8,6 +8,8 @@ import Dashboard from "./../pages/Dashboard";
 import { useEffect, useState } from "react";
 import axios from "../app/api/axios";
 import { useSelector } from "react-redux";
+import Sidenav from "./Sidenav";
+import { MdClose } from "react-icons/md";
 
 const Navbar = () => {
   const [showMediaIcons, setShowMediaIcons] = useState(false);
@@ -18,77 +20,58 @@ const Navbar = () => {
   };
   const { cartTotalQuantity } = useSelector((state) => state.cart);
   const handleLogout = async () => {
-    const { data } = await axios.get("/logout", {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
+    // const { data } = await axios.get("/logout", {
+    //   headers: {
+    //     "Access-Control-Allow-Origin": "*",
 
-        authorization: `Bearer ${user?.accessToken}`,
-      },
-    });
-    if (data) {
-      localStorage.removeItem("profile");
-      navigate("/");
-      setUser(null);
-    }
+    //     authorization: `Bearer ${user?.accessToken}`,
+    //   },
+    // });
+
+    localStorage.removeItem("profile");
+    navigate("/");
+    setUser(null);
   };
   useEffect(() => {}, [user]);
 
   return (
-    <>
-      <nav className="">
-        {/* 1st logo part  */}
-        <div className="logo">
-          <h2>
-            <span onClick={() => setShowMediaIcons(false)}>
-              <NavLink to="/"> Restaurant</NavLink>
-            </span>
-          </h2>
-        </div>
+    <nav className="">
+      {/* 1st logo part  */}
+      <div className="logo">
+        <h2>
+          <span onClick={() => setShowMediaIcons(false)}>
+            <NavLink to="/"> Restaurant</NavLink>
+          </span>
+        </h2>
+      </div>
 
-        {/* 2nd menu part  */}
-        <div
-          className={
-            showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
-          }
-        >
+      {/* 2nd menu part  */}
+      {showMediaIcons ? (
+        <div className="sidenav links">
           <ul>
-            <li onClick={handleMEnu}>
-              <NavLink to="/dashboard">Dashboard</NavLink>
-            </li>
+            {user && user?.role === "Admin" ? (
+              <li onClick={handleMEnu}>
+                <NavLink to="/dashboard">Dashboard</NavLink>
+              </li>
+            ) : (
+              ""
+            )}
 
             <li onClick={handleMEnu}>
               <NavLink to="/profile"> My Profile</NavLink>
             </li>
             <li onClick={handleMEnu}>
               <NavLink to="/cart">
-                {setShowMediaIcons ? (
-                  "My Cart"
-                ) : (
-                  <div className="nav-bag">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="15"
-                      height="15"
-                      fill="currentColor"
-                      className="bi bi-handbag-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M8 1a2 2 0 0 0-2 2v2H5V3a3 3 0 1 1 6 0v2h-1V3a2 2 0 0 0-2-2zM5 5H3.36a1.5 1.5 0 0 0-1.483 1.277L.85 13.13A2.5 2.5 0 0 0 3.322 16h9.355a2.5 2.5 0 0 0 2.473-2.87l-1.028-6.853A1.5 1.5 0 0 0 12.64 5H11v1.5a.5.5 0 0 1-1 0V5H6v1.5a.5.5 0 0 1-1 0V5z" />
-                    </svg>
-                    <span className="bag-quantity">
-                      <span>{cartTotalQuantity}</span>
-                    </span>
-                  </div>
-                )}
+                Cart <span className="cart-quantity">{cartTotalQuantity}</span>
               </NavLink>
             </li>
 
             {/* user123@Vk */}
             {user?.name ? (
-              <li onClick={handleLogout} style={{ cursor: "pointer" }}>
+              <button onClick={handleLogout} style={{ cursor: "pointer" }}>
                 {" "}
                 Sign out
-              </li>
+              </button>
             ) : (
               <>
                 <li onClick={handleMEnu}>
@@ -98,24 +81,28 @@ const Navbar = () => {
             )}
           </ul>
         </div>
+      ) : (
+        ""
+      )}
 
-        <div className="other">
-          {/* hamburget menu start  */}
+      <div className="other">
+        {/* hamburget menu start  */}
 
-          <div className="hamburger-menu">
+        <div className="hamburger-menu">
+          {showMediaIcons ? (
+            <div className="close">
+              <button onClick={() => setShowMediaIcons(!showMediaIcons)}>
+                <MdClose />
+              </button>
+            </div>
+          ) : (
             <li onClick={() => setShowMediaIcons(!showMediaIcons)}>
               {showMediaIcons ? <GiHamburgerMenu /> : <GiHamburgerMenu />}
             </li>
-          </div>
+          )}
         </div>
-      </nav>
-
-      {/* hero section  */}
-      {/* <section className="hero-section">
-        <p>Welcome to </p>
-        <h1>Thapa Technical</h1>
-      </section> */}
-    </>
+      </div>
+    </nav>
   );
 };
 

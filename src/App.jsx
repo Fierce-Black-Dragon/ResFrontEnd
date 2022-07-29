@@ -15,15 +15,17 @@ import RequireAuth from "./features/auth/RequireAuth";
 import EditProduct from "./features/products/EditProduct";
 import Cart from "./features/cart/Cart";
 import { MyProfile } from "./features/auth/MyProfile";
+import Sidenav from "./components/Sidenav";
 
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
       <div className="App">
-        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/auth" element={<Auth />} />
+          {/* <Route path="/" element={<Dashboard />} /> */}
           <Route element={<RequireAuth />}>
             <Route path="/profile" element={<MyProfile />} />
             <Route path="/cart" element={<Cart />} />

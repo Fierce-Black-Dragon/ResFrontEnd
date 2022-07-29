@@ -14,7 +14,7 @@ const Product = ({
   name,
   photo,
   price,
-
+  isSpecial,
   description,
   edit,
   isAvailable,
@@ -52,28 +52,45 @@ const Product = ({
       navigate("/dashboard");
     }
   };
+  const handleRedirect = (id) => {
+    navigate(`/product_details/${id}`);
+  };
   return (
-    <div key={product._id} className="product">
-      <h3>{product.name}</h3>
-      <img src={product?.photo?.secure_url} alt={product.name} />
-      <div className="details">
-        <span> Details : {description}</span>
-        <span className="price"> Price ₹{product.price}</span>
-      </div>
-      {IsAdmin ? (
-        <div>
-          <button onClick={() => handleEdit(_id)}>
-            <FiEdit />
-          </button>
-          <button onClick={() => deleteByIdD(_id)}>
-            <MdOutlineDeleteForever />
-          </button>
+    <div
+      key={product._id}
+      className="product"
+      style={{ backgroundImage: `url(${product?.photo?.secure_url})` }}
+    >
+      {isSpecial ? <p className="special"> Special</p> : ""}
+      <div className="product__main">
+        <h3>{product.name}</h3>
+
+        <div className="details">
+          <span className="price"> Price ₹{product.price}</span>
+          {isAvailable ? (
+            <span style={{ color: "azure" }}>Available</span>
+          ) : (
+            <span>Currently not available</span>
+          )}
         </div>
-      ) : (
-        <button onClick={() => handleAddToCart(product)}>
-          <BsFillCartPlusFill />
-        </button>
-      )}
+        {IsAdmin ? (
+          <div className="product__options">
+            <button onClick={() => handleEdit(_id)}>
+              <FiEdit />
+            </button>
+            <button onClick={() => deleteByIdD(_id)}>
+              <MdOutlineDeleteForever />
+            </button>
+          </div>
+        ) : (
+          <div className="product__options">
+            <button onClick={() => handleAddToCart(product)}>
+              <BsFillCartPlusFill />
+            </button>
+            <button onClick={() => handleRedirect(_id)}>More</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
